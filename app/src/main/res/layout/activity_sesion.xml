@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="26dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_margin="15dp"
+        >
+
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logoinicio"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="Logo"
+            android:layout_gravity="start" />
+
+        <!-- Título Iniciar sesión -->
+        <TextView
+            android:id="@+id/loginTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Iniciar sesión"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Campo de usuario -->
+        <EditText
+            android:id="@+id/logTxtUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/logTxtUsuario"
+            android:inputType="text"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background" />
+
+        <!-- Campo de contraseña con icono de mostrar/ocultar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/logTxtContrasena"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/logTxtContrasena"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background" />
+
+            <!--<ImageView
+                android:id="@+id/showPasswordImageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_eye"
+                android:contentDescription="Mostrar Contraseña" />-->
+
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/logChkRecordar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recordar sesión"
+            android:layout_marginTop="10dp"/>
+        <!-- Enlace de Olvidó su contraseña -->
+        <TextView
+            android:id="@+id/forgotPasswordTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Olvidó su contraseña?"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="start" />
+
+        <!-- Botón Ingresar -->
+        <Button
+            android:id="@+id/logBtnIngresar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logBtnIngresar"
+            android:backgroundTint="@color/primaryblue"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp"
+            android:padding="12dp" />
+
+        <!-- Separador o Conéctate con -->
+        <TextView
+            android:id="@+id/connectWithTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="O conéctate con"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center" />
+
+        <!-- Botón Iniciar sesión con Google -->
+        <Button
+            android:id="@+id/googleLoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Iniciar sesión con Google"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="8dp"
+            android:padding="12dp" />
+
+        <!-- Enlace para registrarse -->
+        <TextView
+            android:id="@+id/registerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿No tienes una cuenta? Regístrate"
+            android:textColor="@android:color/holo_blue_light"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn ="navigation_view"
+    >
+
+    <group
+        android:checkableBehavior="single"
+        >
+        <item
+            android:id="@+id/nav_mesas"
+            android:icon="@drawable/icon_table"
+            android:title="Mesas" />
+        <item
+            android:id="@+id/nav_delivery"
+            android:icon="@drawable/nav_delivery"
+            android:title="Delivery" />
+        <item
+            android:id="@+id/nav_cuenta"
+            android:icon="@drawable/nav_account"
+            android:title="Cuenta" />
+
+    </group>
+
+    <item
+
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/out_logout"
+                android:icon="@drawable/nav_logout"
+                android:title="Logout" />
+        </menu>
+
+    </item>
+
+
+
+
+</menu>

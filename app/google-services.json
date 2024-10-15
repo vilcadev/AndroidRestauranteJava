@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "211701140697",
+    "project_id": "cevicheriaappauth2024",
+    "storage_bucket": "cevicheriaappauth2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211701140697:android:1e5d63e9cb13e5ef0742c8",
+        "android_client_info": {
+          "package_name": "com.example.cevicheriaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211701140697-k3hl2t02rjno10h1h81a4ti3b84ai47p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfZKdHOgD93EeRbYA5b3MdErQNqns8koU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211701140697-k3hl2t02rjno10h1h81a4ti3b84ai47p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

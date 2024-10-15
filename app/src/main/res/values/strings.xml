@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">cevicheriaApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="mesa_1">Mesa 1</string>
+    <string name="mesa_2">Mesa 2</string>
+    <string name="mesa_3">Mesa 3</string>
+    <string name="mesa_4">Mesa 4</string>
+    <string name="mesa_5">Mesa 5</string>
+    <string name="mesa_6">Mesa 6</string>
+
+    <string name="regLblInicioSesion">Iniciar Sesión</string>
+    <string name="logTxtUsuario">Usuario</string>
+    <string name="logTxtContrasena">Contraseña</string>
+    <string name="logBtnIngresar">Ingresar</string>
+
+    <string name="btn_info">Información de la Cuenta</string>
+    <string name="btn_rest">Restablecer Contraseña</string>
+    <string name="cuentaLblTitulo">MI CUENTA</string>
+    <string name="volver">Volver</string>
+    <string name="volver2">Volver</string>
+    <string name="txtPassAct">Contraseña Actual</string>
+    <string name="txtNewPass">Contraseña Nueva</string>
+    <string name="txtConfNewPass">Confirmar nueva contraseña</string>
+    <string name="btnReset">Reestablecer contraseña</string>
+    <string name="default_web_client_id">102731602102469474803</string>
+
+</resources>

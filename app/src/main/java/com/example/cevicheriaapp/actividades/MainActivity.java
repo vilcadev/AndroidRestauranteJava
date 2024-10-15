@@ -24,6 +24,9 @@ import com.example.cevicheriaapp.R;
 import com.example.cevicheriaapp.fragmentos.CuentaFragment;
 import com.example.cevicheriaapp.fragmentos.DeliveryFragment;
 import com.example.cevicheriaapp.fragmentos.MesasFragment;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -90,16 +93,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CuentaFragment()).commit();
         }
         else if (id == R.id.out_logout){
-            // Limpiar SharedPreferences al cerrar sesión
-            SharedPreferences sharedPreferences = getSharedPreferences("Sesion", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear(); // Limpiar todas las preferencias
-            editor.apply(); // Aplicar cambios
 
-            // Redirigir al usuario a la pantalla de inicio de sesión
-            Intent intent = new Intent(this, SesionActivity.class);
-            startActivity(intent);
-            finish(); // Finalizar la actividad actual para que no pueda volver atrás
+            // Cerrar sesión en Firebase (incluye Google)
+            FirebaseAuth.getInstance().signOut();
+
+            // Cerrar sesión de Google
+            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN);
+            googleSignInClient.signOut().addOnCompleteListener(this, task -> {
+                // Limpiar SharedPreferences al cerrar sesión
+                SharedPreferences sharedPreferences = getSharedPreferences("Sesion", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear(); // Limpiar todas las preferencias
+                editor.apply(); // Aplicar cambios
+
+                // Redirigir al usuario a la pantalla de inicio de sesión
+                Intent intent = new Intent(this, SesionActivity.class);
+                startActivity(intent);
+                finish(); // Finalizar la actividad actual para que no pueda volver atrás
+            });
 
         }
 

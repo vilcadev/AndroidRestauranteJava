@@ -33,7 +33,11 @@
                 android:layout_gravity="end|center_vertical"
                 android:scaleType="centerCrop"
                 android:src="@drawable/logoinicio"
-                android:layout_marginEnd="8dp"/>
+                android:background="@drawable/rounded_image"
+                android:layout_marginEnd="8dp"
+                android:clipToOutline="true"
+
+                />
 
         </androidx.appcompat.widget.Toolbar>
 

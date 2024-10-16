@@ -13,7 +13,7 @@
     <string name="mesa_6">Mesa 6</string>
 
     <string name="regLblInicioSesion">Iniciar Sesión</string>
-    <string name="logTxtUsuario">Usuario</string>
+    <string name="logTxtUsuario">Correo</string>
     <string name="logTxtContrasena">Contraseña</string>
     <string name="logBtnIngresar">Ingresar</string>
 

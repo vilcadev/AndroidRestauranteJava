@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -23,8 +24,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -160,22 +163,63 @@ public class SesionActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void iniciarSesion(String string, String string1, boolean recordar) {
-        if(string.equals("omar@upn.pe") && string1.equals("Abc123$")){
+//    private void iniciarSesion(String string, String string1, boolean recordar) {
+//        if(string.equals("omar@upn.pe") && string1.equals("Abc123$")){
+//
+//            if (recordar) {
+//                // Guardar credenciales en SharedPreferences
+//                guardarCredenciales(string, string1);
+//            }
+//
+//            Intent main = new Intent(this, MainActivity.class);
+//            main.putExtra("nombre", "Omar");
+//            startActivity(main);
+//            finish();
+//        }
+//        else{
+//            Toast.makeText(this,"Verificar cuenta",Toast.LENGTH_LONG).show();
+//        }
+//    }
 
-            if (recordar) {
-                // Guardar credenciales en SharedPreferences
-                guardarCredenciales(string, string1);
-            }
+    private void iniciarSesion(String correo, String contrasena, boolean recordar) {
 
-            Intent main = new Intent(this, MainActivity.class);
-            main.putExtra("nombre", "Omar");
-            startActivity(main);
-            finish();
+        // Verificar si los campos están vacíos
+        if (correo.isEmpty()) {
+            Toast.makeText(this, "Por favor ingrese su correo", Toast.LENGTH_LONG).show();
+            return;  // No continuar si el correo está vacío
         }
-        else{
-            Toast.makeText(this,"Verificar cuenta",Toast.LENGTH_LONG).show();
+
+        if (contrasena.isEmpty()) {
+            Toast.makeText(this, "Por favor ingrese su contraseña", Toast.LENGTH_LONG).show();
+            return;  // No continuar si la contraseña está vacía
         }
+
+        // Lógica de inicio de sesión con FirebaseAuth
+        mAuth.signInWithEmailAndPassword(correo, contrasena)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // El inicio de sesión fue exitoso, obtener el usuario actual
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            // Si se selecciona "Recordar sesión", guardar las credenciales
+                            if (recordar) {
+                                guardarCredenciales(correo, contrasena);
+                            }
+
+                            // Redirigir a la MainActivity
+                            Intent main = new Intent(SesionActivity.this, MainActivity.class);
+                            main.putExtra("nombre", user.getEmail());  // Usar el correo como nombre
+                            startActivity(main);
+                            finish();
+
+                        } else {
+                            // Si el inicio de sesión falla, mostrar un mensaje
+                            Toast.makeText(SesionActivity.this, "Correo o Contraseña Incorrecta, inténtelo de nuevo: " , Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     private void guardarCredenciales(String usuario, String contrasena) {

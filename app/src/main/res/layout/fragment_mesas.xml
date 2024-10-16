@@ -7,96 +7,26 @@
 
     <!-- Contenedor principal con alineación vertical -->
     <LinearLayout
+        android:id="@+id/mesasContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:padding="50dp">
-
-        <!-- MESA 1 -->
-        <Button
-            android:id="@+id/mesa_1"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/boton"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/mesa_1"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            />
-
-        <!-- MESA 2 -->
-        <Button
-            android:id="@+id/mesa_2"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/boton2"
-            android:elevation="8dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/mesa_2"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
-
-        <!-- MESA 3 -->
-        <Button
-            android:id="@+id/mesa_3"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/boton3"
-            android:elevation="8dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/mesa_3"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
-
-        <!-- MESA 4 -->
-        <Button
-            android:id="@+id/mesa_4"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/boton"
-            android:elevation="8dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/mesa_4"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
-
-        <!-- MESA 5 -->
-        <Button
-            android:id="@+id/mesa_5"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/boton"
-            android:elevation="8dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/mesa_5"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
-
         <!-- MESA 6 -->
-        <Button
-            android:id="@+id/mesa_6"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/boton"
-            android:elevation="8dp"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/mesa_6"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
+        <!--
+       <Button
+           android:id="@+id/mesa_6"
+           android:layout_width="250dp"
+           android:layout_height="250dp"
+           android:layout_margin="15dp"
+           android:background="@drawable/boton"
+           android:elevation="8dp"
+           android:gravity="center"
+           android:padding="16dp"
+           android:text="@string/mesa_6"
+           android:textColor="@android:color/black"
+           android:textSize="18sp"/>-->
 
     </LinearLayout>
 </ScrollView>

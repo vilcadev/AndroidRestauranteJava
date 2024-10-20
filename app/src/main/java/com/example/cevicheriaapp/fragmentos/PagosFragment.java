@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,12 +76,19 @@ public class PagosFragment extends Fragment {
         // Obtener el objeto Mesa desde el Bundle
         if (getArguments() != null) {
             String mesaJson = getArguments().getString("mesa");
+            String totalGeneral = getArguments().getString("totalGeneral");
+
             Gson gson = new Gson();
             mesa = gson.fromJson(mesaJson, Mesa.class);
 
             // Aquí puedes utilizar los datos de 'mesa', por ejemplo mostrar el nombre de la mesa
             TextView mesaTextView = view.findViewById(R.id.nombreMesaTextView);
             mesaTextView.setText(mesa.getNombreMesa());
+
+            TextView totalId = view.findViewById(R.id.totalId);
+            totalId.setText(totalGeneral);
+
+            Log.d("ProductosSeleccionados", "Longitud del array: " + totalId);
         }
 
         return view;

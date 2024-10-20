@@ -21,6 +21,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.cevicheriaapp.R;
+import com.example.cevicheriaapp.fragmentos.ConfiguracionFragment;
 import com.example.cevicheriaapp.fragmentos.CuentaFragment;
 import com.example.cevicheriaapp.fragmentos.DeliveryFragment;
 import com.example.cevicheriaapp.fragmentos.MesasFragment;
@@ -57,6 +58,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
+
+
+//        setSupportActionBar(toolbar);
+
+        // Eliminar el título
+        getSupportActionBar().setTitle("");
+
+
         // Inicializar FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
         // Obtener las vistas
@@ -91,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DeliveryFragment()).commit();
         } else if (id == R.id.nav_cuenta) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CuentaFragment()).commit();
+        }
+          else if (id == R.id.nav_configuracion) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConfiguracionFragment()).commit();
         }
         else if (id == R.id.out_logout){
 

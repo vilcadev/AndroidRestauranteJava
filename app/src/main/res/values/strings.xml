@@ -27,5 +27,24 @@
     <string name="txtConfNewPass">Confirmar nueva contraseña</string>
     <string name="btnReset">Reestablecer contraseña</string>
     <string name="default_web_client_id">102731602102469474803</string>
+    <string name="deliveryLblTitulo">Delivery</string>
+    <string name="btnCancelPass">Cancelar</string>
 
+    <string name="terminoycondiciones">Aceptación de Términos registrarte como personal del restaurante la Chinitita , aceptas cumplir con estos términos y condiciones
+
+Información  información precisa y actualizada es obligatorio. Cualquier información falsa o engañosa puede resultar en la terminación de tu registro.
+
+Uso de la Cuenta La cuenta creada es exclusivamente para uso del personal autorizado. No se permite compartir tu acceso con terceros.
+
+Responsabilidades del  personal es responsable de cumplir con las políticas y procedimientos del restaurante, así como de mantener la confidencialidad de la información interna.
+
+Modificación de  Cevicheria la Chinita se reserva el derecho de modificar estos términos en cualquier momento. Se notificará a los usuarios sobre cualquier cambio significativo.
+
+Derechos de Propiedad  contenido, marcas y materiales proporcionados en la plataforma son propiedad de la Cevicheria la Chinita y no pueden ser utilizados sin autorización.
+
+Aceptación de Políticas de  registrarte, aceptas la Política de Privacidad de la Cevicheria la Chinita, que detalla cómo se maneja tu información personal.
+
+Terminación de la  Cevicheria la Chinita se reserva el derecho de cancelar o suspender cualquier cuenta que no cumpla con estos términos.
+
+cualquier consulta sobre estos términos, contacta a chinita21@gmail.com.</string>
 </resources>

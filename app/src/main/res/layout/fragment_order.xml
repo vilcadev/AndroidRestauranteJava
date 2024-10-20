@@ -280,7 +280,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total:"
+            android:text="Total: S/ "
             android:textStyle="bold"
             android:textSize="22dp"
             android:layout_marginEnd="8dp" />
@@ -289,7 +289,7 @@
             android:id="@+id/textViewTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="S/ 23.60"
+            android:text="S/ 00.00"
             android:textSize="20dp"
             android:textStyle="bold" />
     </LinearLayout>

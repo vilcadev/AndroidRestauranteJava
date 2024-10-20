@@ -56,13 +56,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_gravity="end" />
 
-            <TextView
-                android:id="@+id/tableNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="MESA 3"
-                android:textStyle="bold" />
 
             <!-- Sección de Selección de fecha -->
             <LinearLayout
@@ -241,9 +234,10 @@
                         android:textSize="23sp" />
 
                     <TextView
+                        android:id="@+id/totalId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="S/ 23.60"
+                        android:text="S/ 00.00"
                         android:textColor="@android:color/black"
                         android:textStyle="bold"
                         android:background="@android:color/darker_gray"

@@ -23,6 +23,7 @@
             android:text="Todo"
             android:textColor="@android:color/white"
             android:textStyle="bold"
+            android:textAllCaps="false"
             android:layout_margin="5dp"
             />
 
@@ -31,9 +32,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
-            android:text="Todo"
+            android:backgroundTint="@android:color/darker_gray"
+            android:text="Arroces"
             android:layout_margin="5dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+/>
 
 
         <Button
@@ -42,9 +46,10 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@android:color/darker_gray"
-            android:text="Todo"
+            android:text="Sopas"
             android:layout_margin="5dp"
-            android:textColor="@android:color/darker_gray"/>
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 
 
@@ -79,10 +84,11 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:backgroundTint="@android:color/holo_blue_light"
-        android:text="Ver 6 seleccionados"
+        android:text="Ver Seleccionados"
 
         android:textColor="@android:color/white"
         android:textStyle="bold"
+        android:textAllCaps="false"
 />
 </LinearLayout>
 

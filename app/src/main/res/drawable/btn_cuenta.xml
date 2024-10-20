@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo del botón -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#D0D0D0"/> <!-- Gris claro (más oscuro) -->
+            <corners android:radius="90dp"/> <!-- Bordes redondeados -->
+            <padding android:left="10dp" android:right="10dp" android:top="10dp" android:bottom="10dp"/> <!-- Relleno interno -->
+        </shape>
+    </item>
+
+    <!-- Sombra -->
+    <item android:top="3dp" android:left="3dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#AAFFFFFF"/> <!-- Sombra blanca con un poco de opacidad -->
+            <corners android:radius="90dp"/>
+        </shape>
+    </item>
+</layer-list>

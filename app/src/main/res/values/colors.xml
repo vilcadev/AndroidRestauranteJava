@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#8692f7</color>
     <color name="primaryblue">#98D8FD</color>
+    <color name="fondoDetallesPedidos">#1F1F1F</color>
+    <color name="colorBotones">#30B4FF</color>
+    <color name="color_toolbar">#000000</color>
 </resources>

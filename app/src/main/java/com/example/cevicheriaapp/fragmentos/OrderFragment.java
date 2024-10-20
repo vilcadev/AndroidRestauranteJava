@@ -194,8 +194,9 @@ public class OrderFragment extends Fragment {
                                     Platillo platillo = new Platillo(
                                             platilloJson.getString("idPlatillo"),
                                             platilloJson.getString("nombrePlatillo"), // Verifica el nombre correcto
-                                            platilloJson.getDouble("precioUnitario"),
-                                            platilloJson.optString("imagenUrl", "") // Usar optString para evitar excepciones si no existe
+                                            platilloJson.getDouble("precioTotal"),
+                                            platilloJson.optString("imagenUrl", ""), // Usar optString para evitar excepciones si no existe
+                                            platilloJson.getInt("cantidad")
                                     );
                                     // Agregar el platillo a la lista
                                     productosSeleccionados.add(platillo);
@@ -280,6 +281,7 @@ public class OrderFragment extends Fragment {
         // Enviar el JSON al PagosFragment a través de un Bundle
         Bundle bundle = new Bundle();
         bundle.putString("mesa", mesaJson);
+        bundle.putDouble("totalGeneral", totalGeneral);
 
         PagosFragment pagosFragment = new PagosFragment();
 
@@ -474,56 +476,72 @@ public class OrderFragment extends Fragment {
                                 String precioProducto = producto.getString("precioUnitario");
                                 String imagenUrl = producto.getString("imagenUrl");
                                 String idPlatillo = producto.getString("idPlatillo");
+                                int cantidad = producto.optInt("cantidad",1);
 
                                 // Crear el objeto Producto
-                                Platillo platillo = new Platillo(idPlatillo, nombreProducto, Double.parseDouble(precioProducto),imagenUrl );
-
-                                // Crear un FrameLayout para cada producto
+                                Platillo platillo = new Platillo(idPlatillo, nombreProducto, Double.parseDouble(precioProducto), imagenUrl, cantidad);
+// Crear un FrameLayout para cada producto
                                 FrameLayout frameLayout = new FrameLayout(getContext());
                                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                                 params.width = 0;
                                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                                 params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
                                 frameLayout.setLayoutParams(params);
-                                frameLayout.setPadding(8, 8, 8, 8);
+                                frameLayout.setPadding(16, 16, 16, 16); // Ajustar el padding
 
-                                // Crear el ImageButton para la imagen del producto
+// Crear un LinearLayout para organizar la imagen y el nombre verticalmente
+                                LinearLayout verticalLayout = new LinearLayout(getContext());
+                                verticalLayout.setOrientation(LinearLayout.VERTICAL);
+                                verticalLayout.setGravity(Gravity.CENTER_HORIZONTAL); // Centrar elementos horizontalmente dentro del LinearLayout
+                                FrameLayout.LayoutParams verticalLayoutParams = new FrameLayout.LayoutParams(
+                                        FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+                                verticalLayout.setLayoutParams(verticalLayoutParams);
+
+// Crear el ImageButton para la imagen del producto
                                 ImageButton imageButton = new ImageButton(getContext());
-                                FrameLayout.LayoutParams imageParams = new FrameLayout.LayoutParams(300, 300);
+                                LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(400, 300); // Cambiar tamaño de la imagen
                                 imageButton.setLayoutParams(imageParams);
                                 imageButton.setScaleType(ImageView.ScaleType.CENTER_CROP);
                                 Glide.with(getContext()).load(imagenUrl).into(imageButton);
-                                imageButton.setBackgroundResource(R.drawable.rounded_image);
+                                imageButton.setBackgroundResource(R.drawable.rounded_image); // Borde redondeado
 
-                                // Crear el TextView para el precio
+// Crear el TextView para el precio
                                 TextView priceTextView = new TextView(getContext());
                                 priceTextView.setText("S/. " + precioProducto);
-                                priceTextView.setBackgroundColor(Color.parseColor("#565656"));
+                                priceTextView.setBackgroundColor(Color.parseColor("#808080")); // Cambiado a gris claro
                                 priceTextView.setTextColor(Color.WHITE);
+                                priceTextView.setTextSize(16); // Tamaño de texto
+                                priceTextView.setTypeface(null, Typeface.BOLD); // Texto en negrita
                                 FrameLayout.LayoutParams priceParams = new FrameLayout.LayoutParams(
                                         FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.TOP | Gravity.END);
-                                priceParams.setMargins(10, 10, 10, 0);
-                                priceTextView.setPadding(8, 8, 8, 8);
+                                priceParams.setMargins(16, 16, 16, 0); // Márgenes ajustados
+                                priceTextView.setPadding(16, 8, 16, 8); // Padding ajustado
 
-                                // Crear el TextView para el nombre del producto
+// Crear el TextView para el nombre del producto
                                 TextView nameTextView = new TextView(getContext());
                                 nameTextView.setText(nombreProducto);
                                 nameTextView.setTextSize(18);
                                 nameTextView.setTextColor(Color.BLACK);
-                                FrameLayout.LayoutParams nameParams = new FrameLayout.LayoutParams(
-                                        FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
-                                nameParams.setMargins(0, 110, 0, 10);
+                                nameTextView.setGravity(Gravity.CENTER); // Centrar texto
+                                nameTextView.setTypeface(null, Typeface.BOLD); // Texto en negrita
+                                LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                nameParams.setMargins(0, 16, 0, 0); // Ajustar márgenes para que quede debajo de la imagen
 
-                                // Agregar las vistas al FrameLayout
-                                frameLayout.addView(imageButton);
-                                frameLayout.addView(priceTextView, priceParams);
-                                frameLayout.addView(nameTextView, nameParams);
+// Agregar la imagen y el nombre al LinearLayout
+                                verticalLayout.addView(imageButton);
+                                verticalLayout.addView(nameTextView, nameParams);
+
+// Agregar las vistas al FrameLayout
+                                frameLayout.addView(verticalLayout);
+                                frameLayout.addView(priceTextView, priceParams); // Precio flotando en la esquina superior derecha
+
 
 
 
 
                                 // Agregar el evento de click al producto
-                                frameLayout.setOnClickListener(new View.OnClickListener() {
+                                imageButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         // Agregar el producto a la lista de seleccionados
@@ -591,9 +609,9 @@ public class OrderFragment extends Fragment {
             cardView.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
-            cardView.setCardElevation(4);
+            cardView.setCardElevation(8); // Mayor elevación para el diseño
+            cardView.setRadius(24); // Bordes más redondeados
             cardView.setCardBackgroundColor(Color.WHITE);
-            cardView.setRadius(16);
 
             // Crear el LinearLayout dentro de la CardView
             LinearLayout cardLayout = new LinearLayout(getContext());
@@ -602,13 +620,12 @@ public class OrderFragment extends Fragment {
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             cardLayout.setOrientation(LinearLayout.HORIZONTAL);
             cardLayout.setGravity(Gravity.CENTER_VERTICAL);
-            cardLayout.setPadding(8, 8, 8, 8);
+            cardLayout.setPadding(16, 16, 16, 16); // Aumenta el padding
 
             // Crear ImageView para la imagen del platillo
             ImageView imagenProducto = new ImageView(getContext());
-            imagenProducto.setLayoutParams(new LinearLayout.LayoutParams(60, 60));
+            imagenProducto.setLayoutParams(new LinearLayout.LayoutParams(100, 100)); // Tamaño mayor
             imagenProducto.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imagenProducto.setBackgroundResource(R.drawable.rounded_image);
             Glide.with(getContext()).load(platillo.getImagenUrl()).into(imagenProducto);
 
             // Crear LinearLayout para texto
@@ -618,25 +635,19 @@ public class OrderFragment extends Fragment {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
             textLayout.setOrientation(LinearLayout.VERTICAL);
-            textLayout.setPadding(8, 0, 0, 0);
+            textLayout.setPadding(16, 0, 0, 0);
 
             // Crear TextView para el nombre del platillo
+            // Nombre del platillo
             TextView nombreProducto = new TextView(getContext());
-            nombreProducto.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
             nombreProducto.setText(platillo.getNombre());
-            nombreProducto.setTextSize(19);
+            nombreProducto.setTextSize(18);
             nombreProducto.setTypeface(null, Typeface.BOLD);
 
             // Crear TextView para el precio del platillo
             TextView precioProducto = new TextView(getContext());
-            precioProducto.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
             precioProducto.setText("S/ " + platillo.getPrecioUnitario());
             precioProducto.setTextSize(16);
-            precioProducto.setTextColor(getResources().getColor(android.R.color.black));
 
             totalGeneral += platillo.getPrecioUnitario();
 
@@ -644,76 +655,103 @@ public class OrderFragment extends Fragment {
             textLayout.addView(nombreProducto);
             textLayout.addView(precioProducto);
 
-            // Crear LinearLayout para botones de sumar y restar
-            LinearLayout botonesLayout = new LinearLayout(getContext());
-            botonesLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            botonesLayout.setOrientation(LinearLayout.HORIZONTAL);
+
 
             // Inicializar cantidad
-            final int[] cantidadActual = {1};
+            final int[] cantidadActual = {platillo.getCantidad()};
 
             // Crear TextView para el total
             TextView total = new TextView(getContext());
-            total.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            total.setText("S/ " + platillo.getPrecioUnitario()); // Inicializar con el precio unitario
-            total.setTextSize(20);
-            total.setTextColor(getResources().getColor(android.R.color.black));
+//            total.setLayoutParams(new LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.WRAP_CONTENT,
+//                    LinearLayout.LayoutParams.WRAP_CONTENT));
+//            total.setText("S/ " + platillo.getPrecioUnitario()); // Inicializar con el precio unitario
+//            total.setTextSize(20);
+//            total.setTextColor(getResources().getColor(android.R.color.black));
 
-            // Contador de cantidad
+
+            // Crear un contenedor horizontal para los botones y el contador
+            LinearLayout layoutContador = new LinearLayout(getContext());
+            layoutContador.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            layoutContador.setOrientation(LinearLayout.HORIZONTAL);
+            layoutContador.setGravity(Gravity.CENTER_HORIZONTAL); // Centrar elementos horizontalmente
+
+            // TextView de cantidad
             TextView cantidad = new TextView(getContext());
             cantidad.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             cantidad.setText(String.valueOf(cantidadActual[0]));
-            cantidad.setPadding(8, 8, 8, 8);
+            cantidad.setPadding(2, 10, 9, 6);
             cantidad.setTextSize(20);
             cantidad.setTextColor(getResources().getColor(android.R.color.black));
 
-            // Botón de restar
+// Ajustar márgenes
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) cantidad.getLayoutParams();
+            params.setMargins(0, 10, 0, 0);  // Ajusta el valor si es necesario
+            params.gravity = Gravity.CENTER_HORIZONTAL;  // Centrar el TextView de cantidad
+            cantidad.setLayoutParams(params);
+
+// Layout contenedor para los botones y el TextView de cantidad
+            LinearLayout botonesLayout = new LinearLayout(getContext());
+            botonesLayout.setOrientation(LinearLayout.HORIZONTAL);
+            botonesLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            botonesLayout.setGravity(Gravity.CENTER_HORIZONTAL);  // Centrar horizontalmente
+
+// Botón de restar
             Button btnRestar = new Button(getContext());
-            btnRestar.setLayoutParams(new LinearLayout.LayoutParams(48, 48));
+            btnRestar.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
             btnRestar.setBackgroundResource(R.drawable.circular_button);
+            btnRestar.setBackgroundResource(R.drawable.ic_minus);
             btnRestar.setText("-");
             btnRestar.setTextSize(24);
-            btnRestar.setTextColor(getResources().getColor(android.R.color.black));
             btnRestar.setOnClickListener(v -> {
                 if (cantidadActual[0] > 1) {
                     cantidadActual[0]--;
                     cantidad.setText(String.valueOf(cantidadActual[0]));
-
-                    // Actualizar la cantidad del producto en la lista
                     actualizarCantidadProducto(platillo, cantidadActual[0]);
-                    // Actualizar el total al restar
-                    actualizarTotal(precioProducto.getText().toString(), cantidadActual[0], total,2);
+                    actualizarTotal(precioProducto.getText().toString(), cantidadActual[0], total, 2);
                 }
             });
 
-            // Botón de sumar
+
+
+// Botón de sumar
             Button btnSumar = new Button(getContext());
-            btnSumar.setLayoutParams(new LinearLayout.LayoutParams(48, 48));
+            btnSumar.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
             btnSumar.setBackgroundResource(R.drawable.circular_button);
+            btnSumar.setBackgroundResource(R.drawable.ic_plus);
             btnSumar.setText("+");
             btnSumar.setTextSize(24);
             btnSumar.setTextColor(getResources().getColor(android.R.color.black));
             btnSumar.setOnClickListener(v -> {
                 cantidadActual[0]++;
                 cantidad.setText(String.valueOf(cantidadActual[0]));
-
-
-                // Actualizar la cantidad del producto en la lista
                 actualizarCantidadProducto(platillo, cantidadActual[0]);
-                // Actualizar el total al sumar
-                actualizarTotal(precioProducto.getText().toString(), cantidadActual[0], total,1);
+                actualizarTotal(precioProducto.getText().toString(), cantidadActual[0], total, 1);
             });
 
-            // Agregar botones al layout de botones
+// Botón de eliminar
+            ImageButton btnEliminar = new ImageButton(getContext());
+            btnEliminar.setLayoutParams(new LinearLayout.LayoutParams(80, 80));
+            btnEliminar.setBackgroundResource(R.drawable.ic_trash);
+            btnEliminar.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            btnEliminar.setPadding(15, 0, 0, 0);
+            btnEliminar.setOnClickListener(v -> {
+                productosSeleccionados.remove(platillo);
+                agregarProductosSeleccionados(layoutProductos);
+            });
+
+// Agregar botones al layout de botones
             botonesLayout.addView(btnRestar);
             botonesLayout.addView(cantidad);
             botonesLayout.addView(btnSumar);
+            botonesLayout.addView(btnEliminar);
+
 
             // Actualizar el total al cargar el producto
 //            totalGeneral += actualizarTotal(precioProducto.getText().toString(), cantidadActual[0], total,);
@@ -722,7 +760,8 @@ public class OrderFragment extends Fragment {
             cardLayout.addView(imagenProducto);
             cardLayout.addView(textLayout);
             cardLayout.addView(botonesLayout);
-            cardLayout.addView(total); // Agregar el total a la CardView
+//            cardLayout.addView(total); // Agregar el total a la CardView
+
             cardView.addView(cardLayout);
 
             // Agregar la CardView al layout de productos

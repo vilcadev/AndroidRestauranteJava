@@ -83,13 +83,14 @@ public class MesasFragment extends Fragment {
 
                                 // Crear un botón por cada mesa
                                 Button btnMesa = new Button(getContext());
-                                btnMesa.setLayoutParams(new LinearLayout.LayoutParams(250, 250));
+                                btnMesa.setLayoutParams(new LinearLayout.LayoutParams(450, 450));
                                 btnMesa.setText(nombreMesa);
                                 btnMesa.setGravity(Gravity.CENTER);
                                 btnMesa.setPadding(16, 16, 16, 16);
                                 btnMesa.setTextSize(18);
                                 btnMesa.setId(View.generateViewId());
                                 btnMesa.setTextColor(getResources().getColor(android.R.color.black));
+
 
                                 // Aquí puedes cambiar el color según el estado de la mesa
                                 if (estadoMesa == 1) {

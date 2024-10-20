@@ -3,7 +3,7 @@
     <item>
         <shape android:shape="rectangle">
             <solid android:color="#D7D5D5" /> <!-- Color de fondo del botón -->
-            <corners android:radius="40dp" /> <!-- Radio de esquina para bordes más redondeados -->
+            <corners android:radius="10dp" /> <!-- Radio de esquina para bordes más redondeados -->
             <stroke android:width="10dp" android:color="#807F7F" /> <!-- Color y grosor del borde rojo -->
         </shape>
     </item>

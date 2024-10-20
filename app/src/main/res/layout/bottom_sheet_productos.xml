@@ -1,26 +1,88 @@
 <!-- res/layout/bottom_sheet_productos.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/bottomsheet_rounded"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="600dp"
     android:orientation="vertical"
+    android:padding="16dp">
 
-    >
-
-    <TextView
+    <!-- Botones superiores -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Productos"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="16dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewProductos"
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@android:color/darker_gray"
+            android:text="Todo"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_margin="5dp"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:text="Todo"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/darker_gray"/>
+
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@android:color/darker_gray"
+            android:text="Todo"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/darker_gray"/>
+    </LinearLayout>
+
+
+
+    <!-- Grid de productos -->
+    <androidx.core.widget.NestedScrollView  android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_weight="4"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true"
+        >
+
+        <GridLayout
+            android:id="@+id/grid_productos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:columnCount="2"
+            android:rowCount="3"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"/>
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <!-- Botón inferior para ver seleccionados -->
+    <Button
+        android:id="@+id/bottom_productos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        />
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="Ver 6 seleccionados"
+
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+/>
 </LinearLayout>
+

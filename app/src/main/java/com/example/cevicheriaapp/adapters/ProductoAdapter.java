@@ -12,16 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cevicheriaapp.R;
+import com.example.cevicheriaapp.clases.Platillo;
 import com.example.cevicheriaapp.clases.Producto;
 
 import java.util.List;
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
-    private List<Producto> productos;
+    private List<Platillo> platillos;
     private Context context;
 
-    public ProductoAdapter(List<Producto> productos, Context context) {
-        this.productos = productos;
+    public ProductoAdapter(List<Platillo> platillos, Context context) {
+        this.platillos = platillos;
         this.context = context;
     }
 
@@ -34,15 +35,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
-        Producto producto = productos.get(position);
-        holder.nombreTextView.setText(producto.getNombre());
-        holder.precioTextView.setText("S/ " + producto.getPrecio());
+        Platillo platillo = platillos.get(position);
+        holder.nombreTextView.setText(platillo.getNombre());
+        holder.precioTextView.setText("S/ " + platillo.getPrecioUnitario());
         // Aquí puedes cargar la imagen usando Glide, Picasso, etc.
     }
 
     @Override
     public int getItemCount() {
-        return productos.size();
+        return platillos.size();
     }
 
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {

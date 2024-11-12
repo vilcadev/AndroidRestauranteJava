@@ -59,12 +59,14 @@
 
             <!-- Sección de Selección de fecha -->
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="8dp">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/mostrarCalendario"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_calendar"
@@ -72,6 +74,7 @@
                     android:layout_gravity="center_vertical"/>
 
                 <EditText
+
                     android:id="@+id/etSeleccionarFecha"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -90,33 +93,16 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="8dp">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/mostrarEmail"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_email"
                     android:padding="10dp"
                     android:layout_gravity="center_vertical"/>
 
-                <EditText
-                    android:id="@+id/etCorreo"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Ingrese su correo"
-                    android:inputType="textEmailAddress"
-                    android:padding="12dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/edit_text_background" />
-            </LinearLayout>
-
-            <!-- Campo de número de teléfono -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
-
-                <ImageView
+                <ImageButton
+                    android:id="@+id/mostrarNumero"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_phone"
@@ -124,12 +110,12 @@
                     android:layout_gravity="center_vertical"/>
 
                 <EditText
-                    android:id="@+id/etNumero"
+                    android:id="@+id/etCorreoonumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Ingrese su número"
-                    android:inputType="phone"
+                    android:hint="Ingrese su correo"
+                    android:inputType="textEmailAddress"
                     android:padding="12dp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/edit_text_background" />
@@ -143,10 +129,11 @@
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/mostrarNombre"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_phone"
+                android:src="@drawable/ic_contact"
                 android:padding="10dp"
                 android:layout_gravity="center_vertical"/>
 
@@ -179,6 +166,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -188,70 +176,20 @@
                         android:textSize="23sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="S/ 20.00"
-                        android:textColor="@android:color/black"
-                        android:textSize="21sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="IGV"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold"
-                        android:textSize="23sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="S/ 3.60"
-                        android:textColor="@android:color/black"
-                        android:textSize="21sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Total"
-                        android:textColor="@android:color/black"
-                        android:textStyle="bold"
-                        android:textSize="23sp" />
-
-                    <TextView
                         android:id="@+id/totalId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="S/ 00.00"
-                        android:textColor="@android:color/black"
+                        android:text=""
                         android:textStyle="bold"
-                        android:background="@android:color/darker_gray"
-                        android:padding="4dp"
-                        android:layout_marginLeft="8dp"
+                        android:textColor="@android:color/black"
                         android:textSize="23sp" />
                 </LinearLayout>
 
-                <!-- Repite el mismo patrón para IGV y Total -->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- Botón Finalizar siempre en la parte inferior -->
+
     <Button
         android:id="@+id/btnFinalizar"
         android:layout_width="match_parent"

@@ -1,146 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragmentos.DetallePedidoFragment">
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.core.widget.NestedScrollView
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/id_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/imgmapa"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true">
-            </ImageView>
-            <androidx.cardview.widget.CardView
-                android:id="@+id/pedido1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
-                app:cardUseCompatPadding="true"
-                android:clickable="true"
-                android:focusable="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/fondoDetallesPedidos">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dirección"
-                            android:layout_marginRight="15dp"
-                            android:textSize="20sp"
-                            android:textColor="@android:color/white"/>
-                        <Button
-                            android:id="@+id/btnDeliveryMarcarEntregado"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Marcar como entregado"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginRight="0dp"
-                            android:backgroundTint="@color/colorBotones"
-                            android:textColor="@android:color/white"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Av. Sol 247"
-                            android:layout_marginLeft="19dp"
-                            android:background="@drawable/marco_textview"
-                            android:padding="8dp"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Detalle Pedido"
-                            android:layout_marginLeft="15dp"
-                            android:textSize="19sp"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@android:color/white"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/logoplatoblanco"
-                                android:layout_marginLeft="20dp">
-                            </ImageView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Arroz de Mariscos"
-                                android:layout_marginLeft="20dp"
-                                android:textColor="@android:color/white"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/logoplatoblanco"
-                                android:layout_marginLeft="20dp">
-                            </ImageView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Ceviche"
-                                android:layout_marginLeft="20dp"
-                                android:textColor="@android:color/white"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/logoplatoblanco"
-                                android:layout_marginLeft="20dp">
-                            </ImageView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jalea"
-                                android:layout_marginLeft="20dp"
-                                android:textColor="@android:color/white"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        android:layout_height="match_parent"/>
+
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Volver"
-        android:layout_gravity="top|start"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/colorBotones"
-        android:textColor="@android:color/white" />
-</FrameLayout>
+        android:text="Volver"/>
+
+    <!-- Bottom Panel for Address and Food List -->
+    <LinearLayout
+        android:id="@+id/bottom_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_panel_background"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Address Text -->
+        <TextView
+            android:id="@+id/address_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Av. El Sol, 512 San Juan de Lurigancho"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:background="@drawable/rounded_border_background"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Food List (RecyclerView for dynamic items) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/food_list"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+        android:layout_marginBottom="8dp"/>
+
+        <!-- Button for Mark as Delivered -->
+        <Button
+            android:id="@+id/btn_mark_delivered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_button_background"
+            android:text="Marcar como Entregado"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+

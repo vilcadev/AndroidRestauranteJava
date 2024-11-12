@@ -47,5 +47,8 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("com.google.code.gson:gson:2.8.9")
+    implementation ("com.itextpdf:itext7-core:7.2.3")
+
+    implementation("com.google.android.gms:play-services-maps:18.0.1")
 
 }

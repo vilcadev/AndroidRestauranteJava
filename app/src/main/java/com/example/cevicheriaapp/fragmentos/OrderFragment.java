@@ -281,7 +281,7 @@ public class OrderFragment extends Fragment {
         // Enviar el JSON al PagosFragment a través de un Bundle
         Bundle bundle = new Bundle();
         bundle.putString("mesa", mesaJson);
-        bundle.putDouble("totalGeneral", totalGeneral);
+        bundle.putString("totalGeneral", String.valueOf(totalGeneral));
 
         PagosFragment pagosFragment = new PagosFragment();
 
@@ -325,7 +325,7 @@ public class OrderFragment extends Fragment {
 
     // Método para enviar los productos seleccionados al servidor con Volley
     private void enviarProductosConVolley() {
-        String url = "https://www.cevicheriaappapitest.somee.com/api/Orden";  // Cambia la URL al endpoint correcto
+        String url = "https://www.cevicheriaappapitest.somee.com/api/Orden";
 
         // Crear el objeto JSON para enviar los detalles de la orden
         JSONObject jsonBody = new JSONObject();
@@ -444,7 +444,7 @@ public class OrderFragment extends Fragment {
 
 
 
-        Toast.makeText(getContext(), "bottom sheet con productos", Toast.LENGTH_SHORT).show();
+
     }
 
 
@@ -460,8 +460,7 @@ public class OrderFragment extends Fragment {
 
 
     private void cargarPlatillosDesdeAPI(GridLayout gridLayout) {
-        String url = "https://www.cevicheriaappapitest.somee.com/api/Menu?fecha=10-19-2024";  // Cambia la URL al endpoint correcto
-
+        String url = "https://www.cevicheriaappapitest.somee.com/api/Menu?fecha=10-21-2024";
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {

@@ -155,13 +155,13 @@ public class SesionActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.logBtnIngresar){
+        if (view.getId() == R.id.logBtnIngresar) {
             boolean recordarSesion = chkRecordar.isChecked();
             iniciarSesion(txtUsuario.getText().toString(), txtContra.getText().toString(), recordarSesion);
 
         }
-
     }
+
 
 //    private void iniciarSesion(String string, String string1, boolean recordar) {
 //        if(string.equals("omar@upn.pe") && string1.equals("Abc123$")){
@@ -215,7 +215,7 @@ public class SesionActivity extends AppCompatActivity implements View.OnClickLis
                             finish();
 
                         } else {
-                            // Si el inicio de sesión falla, mostrar un mensaje
+                            // Si el inicio de sesión falla
                             Toast.makeText(SesionActivity.this, "Correo o Contraseña Incorrecta, inténtelo de nuevo: " , Toast.LENGTH_LONG).show();
                         }
                     }

@@ -63,19 +63,19 @@ public class DeliveryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_delivery, container, false);
-        View cardView = view.findViewById(R.id.pedido1); // Cambia "cardViewId" por el ID real de tu CardView
+        View cardView = view.findViewById(R.id.pedido1);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Navega al OrderDetailsFragment
                 Fragment orderDetailsFragment = new DetallePedidoFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, orderDetailsFragment); // Cambia "fragment_container" por el ID real de tu contenedor de fragmentos
-                transaction.addToBackStack(null); // Agrega a la pila de retroceso
+                transaction.replace(R.id.fragment_container, orderDetailsFragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
-        View cardViewPedido2 = view.findViewById(R.id.pedido2); // Asegúrate de que el ID sea correcto
+        View cardViewPedido2 = view.findViewById(R.id.pedido2);
         cardViewPedido2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

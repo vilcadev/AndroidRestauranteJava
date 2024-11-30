@@ -1,6 +1,7 @@
 package com.example.cevicheriaapp.fragmentos;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ public class InfoCuentaFragment extends Fragment {
 
     // Variables para almacenar los valores iniciales antes de cualquier edición
     private String originalNombreUsuario, originalNombre, originalApellido, originalCorreo;
+
+    private String idUsuario;
 
     public InfoCuentaFragment() {
         // Required empty public constructor
@@ -129,6 +132,16 @@ public class InfoCuentaFragment extends Fragment {
                 btnEditar.setVisibility(View.VISIBLE);
             }
         });
+
+        // Recuperar el idUsuario pasado desde el fragmento anterior
+        if (getArguments() != null) {
+            idUsuario = getArguments().getString("idUsuario");
+        }
+
+        // Log para verificar que el idUsuario se recuperó correctamente
+        Log.d("DEBUG", "El idUsuario recibido en InfoCuentaFragment es: " + idUsuario);
+
+
 
         return view;
     }

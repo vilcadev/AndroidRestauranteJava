@@ -3,6 +3,7 @@ package com.example.cevicheriaapp.actividades;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.cevicheriaapp.R;
+import com.example.cevicheriaapp.clases.PasswordHasher;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -31,6 +38,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SesionActivity extends AppCompatActivity implements View.OnClickListener{
     EditText    txtUsuario, txtContra;
@@ -194,32 +210,76 @@ public class SesionActivity extends AppCompatActivity implements View.OnClickLis
             return;  // No continuar si la contraseña está vacía
         }
 
-        // Lógica de inicio de sesión con FirebaseAuth
-        mAuth.signInWithEmailAndPassword(correo, contrasena)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // El inicio de sesión fue exitoso, obtener el usuario actual
-                            FirebaseUser user = mAuth.getCurrentUser();
+        // Generar el hash de la contraseña
+        String hashedPassword = PasswordHasher.hashPassword(contrasena);
 
-                            // Si se selecciona "Recordar sesión", guardar las credenciales
-                            if (recordar) {
-                                guardarCredenciales(correo, contrasena);
-                            }
+        if (hashedPassword == null) {
+            Toast.makeText(this, "Error al encriptar la contraseña", Toast.LENGTH_LONG).show();
+            return;  // No continuar si ocurrió un error
+        }
 
-                            // Redirigir a la MainActivity
-                            Intent main = new Intent(SesionActivity.this, MainActivity.class);
-                            main.putExtra("nombre", user.getEmail());  // Usar el correo como nombre
-                            startActivity(main);
-                            finish();
 
-                        } else {
-                            // Si el inicio de sesión falla
-                            Toast.makeText(SesionActivity.this, "Correo o Contraseña Incorrecta, inténtelo de nuevo: " , Toast.LENGTH_LONG).show();
+
+
+
+
+        String url = "https://www.cevicheriaappapitest.somee.com/api/Usuario/auth";
+
+
+
+
+
+        // Crear un objeto JSON con los datos
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("correo", correo);
+            jsonBody.put("contrasena", hashedPassword);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error al crear el JSON", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Crear la solicitud JSON
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                jsonBody,
+                response -> {
+                    Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
+                    // Extraer el idUsuario de la respuesta JSON
+                    try {
+
+                        String idUsuario = response.getJSONObject("user").getString("idUsuario");
+                        // Redirigir a la MainActivity
+                        Intent main = new Intent(SesionActivity.this, MainActivity.class);
+                        main.putExtra("idUsuario", idUsuario);
+
+
+                        // Si se selecciona "Recordar sesión", guardar las credenciales
+                        if (recordar) {
+                            guardarCredenciales(correo, contrasena);
                         }
+                        startActivity(main);
+                        finish();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Error al obtener el id del usuario", Toast.LENGTH_SHORT).show();
                     }
-                });
+
+
+
+
+                },
+                error -> {
+                    Toast.makeText(this, "Error al ingresar", Toast.LENGTH_SHORT).show();
+                }
+        );
+
+        // Agregar la solicitud a la cola de solicitudes
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest);
     }
 
     private void guardarCredenciales(String usuario, String contrasena) {
@@ -243,5 +303,7 @@ public class SesionActivity extends AppCompatActivity implements View.OnClickLis
             chkRecordar.setChecked(true);  // Marcamos el checkbox si se cargaron las credenciales
         }
     }
+
+
 
 }

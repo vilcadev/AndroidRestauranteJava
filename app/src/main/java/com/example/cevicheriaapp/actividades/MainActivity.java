@@ -2,7 +2,12 @@ package com.example.cevicheriaapp.actividades;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,29 +71,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setTitle("");
 
 
+
+        handleUserAuthentication();
+    }
+
+    private void handleUserAuthentication() {
         // Inicializar FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
-        // Obtener las vistas
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        // Obtener referencias a las vistas del Toolbar
-//        TextView toolbarEmail = findViewById(R.id.toolbar_email);
         ImageView toolbarProfileImage = findViewById(R.id.toolbar_profile_image);
 
-        // Si hay un usuario autenticado, mostrar sus datos
-//        if (currentUser != null) {
-//            // Mostrar el correo del usuario en el Toolbar
-//            String email = currentUser.getEmail();
-//            toolbarEmail.setText(email);
-//        }
-        // Obtener la URL de la foto de perfil y cargarla usando Glide
-        if (currentUser.getPhotoUrl() != null) {
+        if (currentUser!= null) {
             String photoUrl = currentUser.getPhotoUrl().toString();
             Glide.with(this)
                     .load(photoUrl)
                     .into(toolbarProfileImage);
+        } else {
+
+            toolbarProfileImage.setImageResource(R.drawable.hombre);
+
+        }
+
+        String idUsuario = getIntent().getStringExtra("idUsuario");
+
+        if (idUsuario != null) {
+            // Si se recibió un idUsuario válido, hacer algo con él
+            Log.d("DEBUG", "El idUsuario es: " + idUsuario);
+        } else {
+            // Manejar el caso en el que no se recibió el idUsuario
+            Log.d("DEBUG", "No se recibió un idUsuario");
         }
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -99,7 +113,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_delivery) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DeliveryFragment()).commit();
         } else if (id == R.id.nav_cuenta) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CuentaFragment()).commit();
+            // Crear un nuevo objeto Fragment
+            CuentaFragment cuentaFragment = new CuentaFragment();
+
+            // Crear un Bundle para pasar el idUsuario
+            Bundle bundle = new Bundle();
+            bundle.putString("idUsuario", getIntent().getStringExtra("idUsuario")); // Pasar el idUsuario
+
+            // Establecer el Bundle al fragmento
+            cuentaFragment.setArguments(bundle);
+
+            // Reemplazar el fragmento actual con el nuevo fragmento
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, cuentaFragment)
+                    .commit();
+
+
         }
           else if (id == R.id.nav_configuracion) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConfiguracionFragment()).commit();

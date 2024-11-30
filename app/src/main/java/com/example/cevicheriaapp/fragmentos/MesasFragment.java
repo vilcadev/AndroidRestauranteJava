@@ -102,6 +102,10 @@ public class MesasFragment extends Fragment {
                                     btnMesa.setBackgroundResource(R.drawable.boton3);
                                 }
 
+                                // Agregar margen entre los botones
+                                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) btnMesa.getLayoutParams();
+                                params.setMargins(0, 0, 0, 66); // Aquí se agrega margen inferior
+                                btnMesa.setLayoutParams(params);
 
                                 // Configurar qué pasa cuando se presiona el botón
                                 btnMesa.setOnClickListener(new View.OnClickListener() {

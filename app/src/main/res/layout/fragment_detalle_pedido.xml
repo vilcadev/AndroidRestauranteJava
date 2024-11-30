@@ -6,6 +6,7 @@
 
     <fragment
         android:id="@+id/id_map"
+        android:layout_margin="5dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -16,7 +17,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:textAllCaps="false"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:paddingVertical="8dp"
+        android:textColor="@color/white"
+        android:paddingHorizontal="16dp"
+        android:background="@drawable/rounded_button_background"
+        android:drawableStart="@drawable/arrow_back"
         android:layout_margin="16dp"
+        android:drawablePadding="8dp"
         android:text="Volver"/>
 
     <!-- Bottom Panel for Address and Food List -->
@@ -47,7 +56,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/food_list"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="160dp"
         android:layout_marginBottom="8dp"/>
 
         <!-- Button for Mark as Delivered -->
@@ -58,6 +67,8 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded_button_background"
             android:text="Marcar como Entregado"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"/>

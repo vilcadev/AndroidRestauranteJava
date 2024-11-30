@@ -10,14 +10,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cevicheriaapp.R;
+import com.example.cevicheriaapp.adapters.RecyclerView.DeliveryAdapter;
+import com.example.cevicheriaapp.adapters.RecyclerView.PedidoAdapter;
+import com.example.cevicheriaapp.clases.Delivery;
+import com.example.cevicheriaapp.clases.Pedido;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,6 +34,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +62,16 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
 
     private RequestQueue requestQueue;
 
+    private String idDelivery;
+    private double latitud;
+    private double longitud;
+    private String direccion;
+    private Button btnMarkDelivered;
 
+    private PedidoAdapter pedidoAdapter;
+    private List<Pedido> pedidosList;
+
+    private RecyclerView recyclerView;
     public DetallePedidoFragment() {
         // Required empty public constructor
     }
@@ -78,6 +96,9 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
 
         // Oculta el Toolbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
@@ -126,6 +147,32 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
             }
         });
 
+        btnMarkDelivered = view.findViewById(R.id.btn_mark_delivered);
+        btnMarkDelivered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                markAsDelivered();
+                getActivity().getSupportFragmentManager().popBackStack();
+
+                // Recargar los datos en el fragmento anterior
+                Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentByTag("DeliveryFragment");
+                if (currentFragment != null) {
+
+                    ((DeliveryFragment) currentFragment).loadDeliveries();
+                }
+            }
+        });
+
+
+        recyclerView = view.findViewById(R.id.food_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        pedidosList = new ArrayList<>();
+
+
+
+
+
         // Inicializa Volley
         requestQueue = Volley.newRequestQueue(requireContext());
 
@@ -136,6 +183,25 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
             mapFragment.getMapAsync(this);
         }
 
+
+        if (getArguments() != null) {
+            idDelivery = getArguments().getString("idDelivery");
+            latitud = getArguments().getDouble("latitud");
+            longitud = getArguments().getDouble("longitud");
+            direccion = getArguments().getString("direccion");
+
+            TextView direccionTextView = view.findViewById(R.id.address_text);
+            direccionTextView.setText(direccion);
+
+            fetchPedidos(idDelivery);
+
+            // Inicializar el Adapter
+            pedidoAdapter = new PedidoAdapter(pedidosList,getContext());
+            recyclerView.setAdapter(pedidoAdapter);
+            // Mostrar un Toast con los datos para verificar que llegaron
+            String toastMessage = "ID: " + idDelivery + ", Lat: " + latitud + ", Long: " + longitud;
+            Toast.makeText(getContext(), toastMessage, Toast.LENGTH_LONG).show();
+        }
 
 
         return view;
@@ -154,8 +220,8 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
         gMap = googleMap;
 
         // Define el punto de inicio y de destino
-        LatLng start = new LatLng(-12.0464, -77.0428); // Lima, Perú
-        LatLng end = new LatLng(-12.1205, -77.0296); // Otro punto en Lima
+        LatLng start = new LatLng(-11.943746, -76.989977); // Lima, Perú
+        LatLng end = new LatLng(latitud, longitud); // Otro punto en Lima
 
         // Agrega marcadores en ambos puntos
         gMap.addMarker(new MarkerOptions().position(start).title("Inicio"));
@@ -244,4 +310,79 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
         }
         return poly;
     }
+
+    public void fetchPedidos(String idDelivery) {
+        String url = "https://www.cevicheriaappapitest.somee.com/api/Delivery/" + idDelivery;  // Ajusta la URL de la API
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Crear la lista de pedidos
+                        List<Pedido> pedidos = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject pedidoJson = response.getJSONObject(i);
+                                Pedido pedido = new Pedido(
+                                        pedidoJson.getString("idPlatillo"),
+                                        pedidoJson.getString("nombre"),
+                                        pedidoJson.getString("imagen"),
+                                        pedidoJson.getDouble("precioTotal"),
+                                        pedidoJson.getInt("cantidad")
+                                );
+                                pedidos.add(pedido);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        // Configurar el RecyclerView
+
+                        PedidoAdapter adapter = new PedidoAdapter(pedidos, getContext());
+
+                        recyclerView.setAdapter(adapter);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Maneja el error aquí
+                        Toast.makeText(getContext(), "Error al cargar los pedidos", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        // Añadir la solicitud a la cola
+        requestQueue.add(request);
+    }
+
+
+    private void markAsDelivered() {
+
+        String url = "https://www.cevicheriaappapitest.somee.com/api/Delivery/" + idDelivery;
+        // Crear una solicitud PUT
+        JsonObjectRequest putRequest = new JsonObjectRequest(Request.Method.PUT, url, null,
+                response -> {
+                    // Manejo de la respuesta exitosa
+                    if (getContext() != null) {
+                        Toast.makeText(getContext(), "Entrega marcada como entregada", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    // Manejo del error
+                    if (getContext() != null) {
+                        Toast.makeText(getContext(), "Error al marcar como entregado", Toast.LENGTH_SHORT).show();
+                    }
+                    if (error instanceof VolleyError) {
+                        // Si la solicitud falla por algún motivo (por ejemplo, error de red)
+                        error.printStackTrace();
+                    }
+                });
+
+        // Crear una instancia de la cola de solicitudes
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        // Agregar la solicitud a la cola
+        requestQueue.add(putRequest);
+    }
+
 }

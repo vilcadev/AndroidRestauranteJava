@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp">
+
+            <!-- Estado -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/txtPedidoEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/estado_background"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="Recibido"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Cliente, Dirección y Hora -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cliente:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/txtClienteNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lucho"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/txtPedidoHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12:51 am"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Dirección -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dirección:"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/txtDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Av. Los Pinos 123"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,8 @@ public class CuentaFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private String idUsuario;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,6 +47,14 @@ public class CuentaFragment extends Fragment {
             public void onClick(View v) {
                 // Cargar el fragmento de InfoCuentaFragment
                 Fragment infoCuentaFragment = new InfoCuentaFragment();
+
+                // Crear un Bundle para pasar el idUsuario
+                Bundle bundle = new Bundle();
+                bundle.putString("idUsuario", idUsuario); // Pasar el idUsuario
+
+                // Establecer el Bundle al fragmento
+                infoCuentaFragment.setArguments(bundle);
+
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, infoCuentaFragment); // Asegúrate de tener un contenedor para los fragmentos
                 transaction.addToBackStack(null); // Permite volver al fragmento anterior
@@ -63,6 +74,14 @@ public class CuentaFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+        // Recuperar el idUsuario pasado desde el Activity
+        if (getArguments() != null) {
+            idUsuario = getArguments().getString("idUsuario");
+        }
+
+        // Log para verificar que se recuperó correctamente el id
+        Log.d("DEBUG", "El idUsuario recibido en el fragmento es: " + idUsuario);
 
         return view;
     }

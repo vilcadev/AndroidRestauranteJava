@@ -23,52 +23,27 @@
             android:layout_marginBottom="24dp"
             android:contentDescription="Logo"
             android:layout_gravity="start" />
-        <!-- Title -->
+        <!-- Título -->
         <TextView
-            android:id="@+id/loginTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registro"
+            android:text="Registro de Usuario"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:layout_marginBottom="24dp"
-            />
+            android:layout_marginBottom="24dp" />
 
-        <!-- Usuario -->
+        <!-- Nombre -->
         <EditText
-            android:id="@+id/usernameEditText"
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Usuario"
+            android:hint="Nombre"
             android:inputType="text"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/edit_text_background"
-            />
+            android:background="@drawable/edit_text_background"/>
 
-        <!-- Nombre(s) -->
-        <EditText
-            android:id="@+id/firstNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre(s)"
-            android:inputType="text"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit_text_background"
-            />
-
-        <!-- Apellidos -->
-        <EditText
-            android:id="@+id/lastNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Apellidos"
-            android:inputType="text"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/edit_text_background"
-            />
-
-        <!-- Correo electrónico -->
+        <!-- Correo -->
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
@@ -76,8 +51,7 @@
             android:hint="Correo electrónico"
             android:inputType="textEmailAddress"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/edit_text_background"
-            />
+            android:background="@drawable/edit_text_background"/>
 
         <!-- Contraseña -->
         <EditText
@@ -87,10 +61,9 @@
             android:hint="Contraseña"
             android:inputType="textPassword"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/edit_text_background"
-            />
+            android:background="@drawable/edit_text_background"/>
 
-        <!-- Confirmar contraseña -->
+        <!-- Confirmar Contraseña -->
         <EditText
             android:id="@+id/confirmPasswordEditText"
             android:layout_width="match_parent"
@@ -98,10 +71,27 @@
             android:hint="Confirmar contraseña"
             android:inputType="textPassword"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/edit_text_background"
-            />
+            android:background="@drawable/edit_text_background"/>
 
-        <!-- Buttons -->
+        <!-- Botón para Tomar Foto -->
+        <Button
+            android:id="@+id/takePhotoButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tomar Foto"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Previsualización de la Imagen -->
+        <ImageView
+            android:id="@+id/photoPreviewImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="Previsualización de la Foto" />
+
+        <!-- Botón Registrar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -129,5 +119,6 @@
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>
-    </LinearLayout>
+
+        </LinearLayout>
 </ScrollView>

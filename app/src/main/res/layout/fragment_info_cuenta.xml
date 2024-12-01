@@ -40,7 +40,7 @@
                 android:id="@+id/imgEditPhoto"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_email"
+                android:src="@drawable/ic_camera"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="8dp"
                 android:background="@drawable/circle_white_background"
@@ -76,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Editar"
+                android:textAllCaps="false"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/botones_info"
                 android:textColor="@android:color/white" />
@@ -85,6 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Guardar"
+                android:textAllCaps="false"
                 android:visibility="gone"
                 android:background="@drawable/botones_info"
                 android:textColor="@android:color/white" />

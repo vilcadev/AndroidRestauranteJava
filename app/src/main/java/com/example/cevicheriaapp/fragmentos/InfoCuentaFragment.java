@@ -63,12 +63,6 @@ public class InfoCuentaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info_cuenta, container, false);
 
-        // Encontrar los botones y EditTexts en el layout
-//        ImageView imgCamera = view.findViewById(R.id.imgCamera);
-//        btnEditar = view.findViewById(R.id.btnEditar);
-//        btnGuardar = view.findViewById(R.id.btnGuardar);
-//        btnCancelar = view.findViewById(R.id.btnCancelar);
-//        etNombreUsuario = view.findViewById(R.id.etNombreUsuario);
         etNombre = view.findViewById(R.id.etNombre);
         imvCircular = view.findViewById(R.id.imvCircular);
 
@@ -84,56 +78,9 @@ public class InfoCuentaFragment extends Fragment {
             startActivityForResult(intent, 1); // 1 es el código de solicitud para la imagen
         });
 
-//        etApellido = view.findViewById(R.id.etApellido);
-//        etCorreo = view.findViewById(R.id.etCorreo);
 
-        // Deshabilitar los EditTexts inicialmente
-//        etNombreUsuario.setEnabled(false);
-//        etNombre.setEnabled(false);
-//        etApellido.setEnabled(false);
-//        etCorreo.setEnabled(false);
 
-        // Ocultar botones Guardar y Cancelar inicialmente
-//        btnGuardar.setVisibility(View.GONE);
-//        btnCancelar.setVisibility(View.GONE);
 
-        // Configurar el listener para el ImageView
-//        imgCamera.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Retroceder a la actividad anterior
-//                requireActivity().onBackPressed();
-//            }
-//        });
-
-        // Configurar el listener para el botón "Editar"
-//        btnEditar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Guardar los valores actuales antes de editar
-//                originalNombreUsuario = etNombreUsuario.getText().toString();
-//                originalNombre = etNombre.getText().toString();
-//                originalApellido = etApellido.getText().toString();
-//                originalCorreo = etCorreo.getText().toString();
-//
-//                // Habilitar los campos de EditText para edición
-//                etNombreUsuario.setEnabled(true);
-//                etNombre.setEnabled(true);
-//                etApellido.setEnabled(true);
-//                etCorreo.setEnabled(true);
-//
-//                // Cambiar el color del texto para dar feedback visual
-//                etNombreUsuario.setTextColor(getResources().getColor(android.R.color.black));
-//                etNombre.setTextColor(getResources().getColor(android.R.color.black));
-//                etApellido.setTextColor(getResources().getColor(android.R.color.black));
-//                etCorreo.setTextColor(getResources().getColor(android.R.color.black));
-//
-//                // Ocultar el botón "Editar" y mostrar los botones "Guardar" y "Cancelar"
-//                btnEditar.setVisibility(View.GONE);
-//                btnGuardar.setVisibility(View.VISIBLE);
-//                btnCancelar.setVisibility(View.VISIBLE);
-//            }
-//        });
 
         // Habilitar la edición del nombre cuando se presione el botón "Editar"
         btnEditar.setOnClickListener(v -> {
@@ -142,49 +89,6 @@ public class InfoCuentaFragment extends Fragment {
             btnEditar.setVisibility(View.GONE); // Ocultar el botón "Editar"
         });
 
-
-//
-//        // Configurar el listener para el botón "Guardar"
-//        btnGuardar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Aquí puedes agregar lógica para guardar los datos en una base de datos o similar
-//
-//                // Deshabilitar los campos de EditText de nuevo
-//                etNombreUsuario.setEnabled(false);
-//                etNombre.setEnabled(false);
-//                etApellido.setEnabled(false);
-//                etCorreo.setEnabled(false);
-//
-//                // Ocultar botones Guardar y Cancelar, y mostrar el botón Editar
-//                btnGuardar.setVisibility(View.GONE);
-//                btnCancelar.setVisibility(View.GONE);
-//                btnEditar.setVisibility(View.VISIBLE);
-//            }
-//        });
-//
-//        // Configurar el listener para el botón "Cancelar"
-//        btnCancelar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Revertir los cambios y restaurar los valores originales
-//                etNombreUsuario.setText(originalNombreUsuario);
-//                etNombre.setText(originalNombre);
-//                etApellido.setText(originalApellido);
-//                etCorreo.setText(originalCorreo);
-//
-//                // Deshabilitar los campos de EditText de nuevo
-//                etNombreUsuario.setEnabled(false);
-//                etNombre.setEnabled(false);
-//                etApellido.setEnabled(false);
-//                etCorreo.setEnabled(false);
-//
-//                // Ocultar botones Guardar y Cancelar, y mostrar el botón Editar
-//                btnGuardar.setVisibility(View.GONE);
-//                btnCancelar.setVisibility(View.GONE);
-//                btnEditar.setVisibility(View.VISIBLE);
-//            }
-//        });
 
         // Recuperar el idUsuario pasado desde el fragmento anterior
         if (getArguments() != null) {
@@ -203,7 +107,7 @@ public class InfoCuentaFragment extends Fragment {
                 Toast.makeText(getContext(), "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show();
                 return;
             }
-            guardarDatosUsuario(nuevoNombre, selectedBitmap,idUsuario);
+            guardarDatosUsuario(nuevoNombre,idUsuario);
         });
         return view;
     }
@@ -230,7 +134,6 @@ public class InfoCuentaFragment extends Fragment {
                     // Mostrar la imagen en el ShapeableImageView (imvCircular)
                     imvCircular.setImageBitmap(bitmap); // Actualizar la imagen de perfil
 
-                    imagenBase64 = convertirImagenAStringBase64(bitmap);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -247,28 +150,27 @@ public class InfoCuentaFragment extends Fragment {
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
-    private void guardarDatosUsuario(String nuevoNombre, Bitmap nuevaFoto, String usuarioId) {
+    private void guardarDatosUsuario(String nuevoNombre, String usuarioId) {
         // Convertir la imagen a Base64
 
-        if (nuevaFoto != null) {
-            imagenBase64 = convertirImagenAStringBase64(nuevaFoto);
-        }
+
 
         // Crear un mapa de parámetros para enviar en el formulario
         Map<String, String> params = new HashMap<>();
         params.put("Nombre", nuevoNombre);  // Agregar el nombre
-        params.put("Imagen", imagenBase64); // Agregar la imagen en Base64
+
 
         // Crear la solicitud PATCH con Volley usando MultipartRequest
         MultipartRequest multipartRequest = new MultipartRequest(
-                "https://www.cevicheriaappapitest.somee.com/api/Usuario?id=" + usuarioId,  // URL de tu API con el ID del usuario
+                "https://www.cevicheriaappapitest.somee.com/api/Usuario?id=" + usuarioId,
                 params,
                 response -> {
-                    // Manejar la respuesta exitosa
+
                     Toast.makeText(getContext(), "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().popBackStack();
                 },
                 error -> {
-                    // Manejar el error de la solicitud
+
                     error.printStackTrace();
                     Toast.makeText(getContext(), "Error en la solicitud", Toast.LENGTH_SHORT).show();
                 }
@@ -282,10 +184,9 @@ public class InfoCuentaFragment extends Fragment {
 
 
     private void cargarDatosUsuario(String userId) {
-        String url = "https://www.cevicheriaappapitest.somee.com/api/Usuario?id=" + userId; // Ajusta la URL según tu API
+        String url = "https://www.cevicheriaappapitest.somee.com/api/Usuario?id=" + userId;
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
-        // Crear solicitud GET
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -314,7 +215,6 @@ public class InfoCuentaFragment extends Fragment {
                 }
         );
 
-        // Agregar la solicitud a la cola de Volley
         requestQueue.add(jsonObjectRequest);
     }
 

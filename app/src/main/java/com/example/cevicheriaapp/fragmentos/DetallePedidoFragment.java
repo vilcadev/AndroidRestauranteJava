@@ -125,18 +125,7 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detalle_pedido, container, false);
-//        Button btnBack = view.findViewById(R.id.btnBack);
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Transacción para volver al fragment_delivery
-//                Fragment deliveryFragment = new DeliveryFragment(); // Asegúrate de usar el fragment correcto
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.fragment_container, deliveryFragment); // Cambia "fragment_container" por el ID real del contenedor de tus fragmentos
-//                transaction.addToBackStack(null); // Opcional, si quieres permitir volver aquí con el botón de atrás del sistema
-//                transaction.commit();
-//            }
-//        });
+
 
         Button btnBack = view.findViewById(R.id.btn_back);
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -198,9 +187,7 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
             // Inicializar el Adapter
             pedidoAdapter = new PedidoAdapter(pedidosList,getContext());
             recyclerView.setAdapter(pedidoAdapter);
-            // Mostrar un Toast con los datos para verificar que llegaron
-            String toastMessage = "ID: " + idDelivery + ", Lat: " + latitud + ", Long: " + longitud;
-            Toast.makeText(getContext(), toastMessage, Toast.LENGTH_LONG).show();
+
         }
 
 
@@ -209,12 +196,6 @@ public class DetallePedidoFragment extends Fragment implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-//        gMap = googleMap;
-//
-//        // Establece una ubicación inicial para el mapa (por ejemplo, Lima, Perú)
-//        LatLng lima = new LatLng(-12.0464, -77.0428);
-//        gMap.addMarker(new MarkerOptions().position(lima).title("Lima, Perú"));
-//        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lima, 10));
 
 
         gMap = googleMap;

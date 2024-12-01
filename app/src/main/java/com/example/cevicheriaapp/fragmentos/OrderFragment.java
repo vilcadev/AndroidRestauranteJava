@@ -210,7 +210,7 @@ public class OrderFragment extends Fragment {
                             }
                         } catch (JSONException e) {
                             Log.e("JSONError", "Error al analizar la respuesta: " + e.getMessage());
-                            Toast.makeText(getContext(), "Error al cargar los productos.", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 },
@@ -218,7 +218,7 @@ public class OrderFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("VolleyError", "Error: " + error.getMessage());
-                        Toast.makeText(getActivity(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
         );
@@ -234,16 +234,11 @@ public class OrderFragment extends Fragment {
         TextView mesaNumeroTextView = view.findViewById(R.id.tableNumber);
         mesaNumeroTextView.setText(mesa.getNombreMesa());
 //
-//        Button buscarButton = view.findViewById(R.id.searchProduct);
-//        buscarButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                botonBuscarProductoPress(v);
-//            }
-//        });
 
 
-        // Asignar evento click al botón btnSave
+
+
+
         Button guardarButton = view.findViewById(R.id.btnSave);
         guardarButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -546,8 +541,10 @@ public class OrderFragment extends Fragment {
                                         // Agregar el producto a la lista de seleccionados
                                         if (!productosSeleccionados.contains(platillo)) {
                                             productosSeleccionados.add(platillo);
+                                            Toast.makeText(v.getContext(), "Producto agregado", Toast.LENGTH_SHORT).show();
                                         } else {
                                             productosSeleccionados.remove(platillo); // Si ya está, lo remueve
+                                            Toast.makeText(v.getContext(), "Producto eliminado", Toast.LENGTH_SHORT).show();
                                         }
 
                                         actualizarBotonSeleccionados(botonSeleccionados);
@@ -661,12 +658,7 @@ public class OrderFragment extends Fragment {
 
             // Crear TextView para el total
             TextView total = new TextView(getContext());
-//            total.setLayoutParams(new LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.WRAP_CONTENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT));
-//            total.setText("S/ " + platillo.getPrecioUnitario()); // Inicializar con el precio unitario
-//            total.setTextSize(20);
-//            total.setTextColor(getResources().getColor(android.R.color.black));
+
 
 
             // Crear un contenedor horizontal para los botones y el contador

@@ -65,9 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-//        setSupportActionBar(toolbar);
 
-        // Eliminar el título
         getSupportActionBar().setTitle("");
 
 
@@ -88,17 +86,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .into(toolbarProfileImage);
         } else {
 
-            toolbarProfileImage.setImageResource(R.drawable.hombre);
+            toolbarProfileImage.setImageResource(R.drawable.logoinicio);
 
         }
 
         String idUsuario = getIntent().getStringExtra("idUsuario");
 
         if (idUsuario != null) {
-            // Si se recibió un idUsuario válido, hacer algo con él
+
             Log.d("DEBUG", "El idUsuario es: " + idUsuario);
         } else {
-            // Manejar el caso en el que no se recibió el idUsuario
+
             Log.d("DEBUG", "No se recibió un idUsuario");
         }
     }
@@ -113,17 +111,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_delivery) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DeliveryFragment()).commit();
         } else if (id == R.id.nav_cuenta) {
-            // Crear un nuevo objeto Fragment
+
             CuentaFragment cuentaFragment = new CuentaFragment();
 
-            // Crear un Bundle para pasar el idUsuario
-            Bundle bundle = new Bundle();
-            bundle.putString("idUsuario", getIntent().getStringExtra("idUsuario")); // Pasar el idUsuario
 
-            // Establecer el Bundle al fragmento
+            Bundle bundle = new Bundle();
+            bundle.putString("idUsuario", getIntent().getStringExtra("idUsuario"));
+
+
             cuentaFragment.setArguments(bundle);
 
-            // Reemplazar el fragmento actual con el nuevo fragmento
+
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, cuentaFragment)
                     .commit();
@@ -135,22 +133,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.out_logout){
 
-            // Cerrar sesión en Firebase (incluye Google)
+
             FirebaseAuth.getInstance().signOut();
 
-            // Cerrar sesión de Google
+
             GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN);
             googleSignInClient.signOut().addOnCompleteListener(this, task -> {
-                // Limpiar SharedPreferences al cerrar sesión
+
                 SharedPreferences sharedPreferences = getSharedPreferences("Sesion", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear(); // Limpiar todas las preferencias
-                editor.apply(); // Aplicar cambios
+                editor.clear();
+                editor.apply();
 
-                // Redirigir al usuario a la pantalla de inicio de sesión
+
                 Intent intent = new Intent(this, SesionActivity.class);
                 startActivity(intent);
-                finish(); // Finalizar la actividad actual para que no pueda volver atrás
+                finish();
             });
 
         }
@@ -159,12 +157,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-//            drawerLayout.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
+
 }
